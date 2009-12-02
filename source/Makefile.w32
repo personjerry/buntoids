@@ -1,0 +1,6 @@
+include Makefile
+
+PLATFORM=Windows
+DEST=../$(PROG).exe
+LFLAGS=-lmingw32 -lSDLmain -lSDL -mwindows -lSDL_image -lSDL_mixer
+
