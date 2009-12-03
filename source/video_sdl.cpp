@@ -160,16 +160,16 @@ void sdlvideo_update() {
         else if(r_pokemenu) {
                 imglist[505].draw_static(0,0);
                 if(poke_choice==0) {
-                        imglist[506].draw_static(19,24);
+                        imglist[506].draw_static(4,18);
                 }
                 else {
-                        imglist[507].draw_static(75,Sint16(14+15*(poke_choice-1))); 
+                        imglist[507].draw_static(74,Sint16(4+18.5*(poke_choice-1))); 
                 }
                 
-                imglist[508].draw_static(16,8);
-                iconimg[party[0].id].draw_static(19,24);
+                imglist[508].draw_static(0,0);
+                iconimg[party[0].id].draw_static(6,19);
                 for (int i = 1; i < 6; i++) {
-                      iconimg[party[i].id].draw_static(75,Sint16(14+15*(i-1))); 
+                      iconimg[party[i].id].draw_static(76,Sint16(5+18.5*(i-1))); 
                 }
                 
         }
