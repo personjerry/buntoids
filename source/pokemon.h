@@ -22,6 +22,7 @@ struct Poke {
 extern std::vector<Poke> monsters;
 extern Poke party[6];
 extern Poke EMPTY;
+extern Poke fight;
 
 void pokemon_init();
 

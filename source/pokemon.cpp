@@ -1,10 +1,12 @@
 #include "shared.h"
 #include "pokemon.h"
 #include "img.h"
+#include "SDL/SDL_rotozoom.h"
 
 std::vector<Poke> monsters;
 Poke party[6];
 Poke EMPTY;
+Poke fight;
 
 void loadpoke(const std::string& name) {
 	static int id=0;
@@ -24,6 +26,8 @@ void loadpoke(const std::string& name) {
         temp1->load(loc1.str());
         poseimg[id] = *temp1;
         delete(temp1);
+        
+        rposeimg[id].set((SDL_Surface*)(zoomSurface(poseimg[id].get(),-1,1,1)));
 
         loc2 << "pokemon/" << img2.str();
         Image * temp2 = new Image;
@@ -39,15 +43,16 @@ void loadpoke(const std::string& name) {
         
         
 }
-void setpokemon(int monsterint, int level, double health, double hp_per_lvl, double attack, double att_per_lvl, double defense, double def_per_lvl)
+void setpokemon(Poke* target,int id, int level, double health, double hp_per_lvl, double attack, double att_per_lvl, double defense, double def_per_lvl)
 {
-        monsters[monsterint].level = level;
-        monsters[monsterint].health = health;
-        monsters[monsterint].hp_per_lvl = hp_per_lvl;
-        monsters[monsterint].attack = attack;
-        monsters[monsterint].att_per_lvl = att_per_lvl;
-        monsters[monsterint].defense = defense;
-        monsters[monsterint].def_per_lvl = def_per_lvl;
+        target->level = level;
+        target->id = id;
+        target->health = health;
+        target->hp_per_lvl = hp_per_lvl;
+        target->attack = attack;
+        target->att_per_lvl = att_per_lvl;
+        target->defense = defense;
+        target->def_per_lvl = def_per_lvl;
 }
 
 void pokemon_init() { //do we want to make our own pokemon?
@@ -84,7 +89,10 @@ void pokemon_init() { //do we want to make our own pokemon?
         
         
         // make sure the empty pokemon is consistent.
+        setpokemon(&EMPTY,0,0,0,0,0,0,0,0);
         EMPTY.name = "EMPTY";
+        EMPTY.battle = "";
+        EMPTY.pose = "";
           
         // fill party slots with empty at first.
         party[0] = EMPTY;
@@ -95,7 +103,7 @@ void pokemon_init() { //do we want to make our own pokemon?
         party[5] = EMPTY;
           
         // testing with all bulbasaurs.
-        setpokemon(0,1,20,2,5,1.3,8,2.1);
+        setpokemon(&(monsters[0]),1,1,20,2,5,1.3,8,2.1);
         party[0] = monsters[0];
         party[1] = monsters[0];
         party[2] = monsters[0];
@@ -105,11 +113,5 @@ void pokemon_init() { //do we want to make our own pokemon?
         
 
 
-/*
-	for(size_t i=0; i<monsters.size(); ++i) {
-		cout<<"#"<<i+1<<": "<<monsters[i].name<<'\n';
-	}
-	cout<<flush;
-*/
 }
 

@@ -18,6 +18,8 @@ class Image {
 		void load(std::string);
 		void draw(const Sint16,const Sint16);
 		void draw_static(const Sint16,const Sint16);
+                SDL_Surface * get() {return surface;};
+                void set(SDL_Surface * to){surface = to;};
 };
 
 extern std::map<int,Image> imglist;

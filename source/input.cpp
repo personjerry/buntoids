@@ -3,6 +3,7 @@
 #include "sound.h"
 #include "file.h"
 #include "input.h"
+#include "pokemon.h"
 
 #include <SDL/SDL.h>
 
@@ -12,6 +13,16 @@ void input_update() {
 	SDL_Event event;
 
 	while(SDL_PollEvent(&event)) {
+                switch(event.type) {
+			switch(event.key.keysym.sym) {
+                                case SDLK_BACKQUOTE: //Cheats... only for dev testing of course.
+                                r_battle=true;
+                                battle=true;
+                                fight = monsters[0];
+                                default:
+                                  break;
+                        }
+                }
 		if(r_menu) {
 			switch(event.type) {
 				case SDL_QUIT: Game::run=false; break;
