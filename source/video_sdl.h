@@ -9,8 +9,11 @@ extern SDL_Surface *screen;
 
 extern bool r_menu;
 extern bool r_pokemenu;
+extern bool r_battle;
+extern bool battle;
 extern int menu_choice;
 extern int poke_choice;
+extern int move_choice;
 extern std::string menu_text;
 
 extern int fading;

@@ -2,6 +2,7 @@
 #define _POKEMON_
 #define POKECOUNT 150
 #include <string>
+#include "move.h"
 
 struct Poke {
         int id;
@@ -15,6 +16,7 @@ struct Poke {
         double att_per_lvl;
         double defense;
         double def_per_lvl;
+        Move moves[4];
 };
 
 extern std::vector<Poke> monsters;

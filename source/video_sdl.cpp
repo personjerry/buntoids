@@ -18,10 +18,13 @@ SDL_Surface *screen;
 SDL_Surface *text=NULL, *text2=NULL;
 TTF_Font *font;
 
-bool r_menu;
-bool r_pokemenu;
+bool r_menu=0;
+bool r_pokemenu=0;
+bool r_battle=0;
+bool battle=0;
 int menu_choice=0;
 int poke_choice=0;
+int move_choice=0;
 std::string menu_text;
 
 int fading;
@@ -171,6 +174,9 @@ void sdlvideo_update() {
                 for (int i = 1; i < 6; i++) {
                       iconimg[party[i].id].draw_static(76,Sint16(6+18.4*(i-1))); 
                 }
+                
+        }
+        else if(r_battle) {
                 
         }
         

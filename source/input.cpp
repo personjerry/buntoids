@@ -47,8 +47,7 @@ void input_update() {
 					}
 			}
 		}
-                else if(r_pokemenu)
-                {
+                else if(r_pokemenu) {
 			switch(event.type) {
 				case SDL_QUIT: Game::run=false; break;
 
@@ -68,13 +67,49 @@ void input_update() {
 
 						case SDLK_SPACE:
                                                         r_pokemenu=false;
-                                                        r_menu = true;
+                                                        if(!battle)
+                                                        {
+                                                              r_menu = true;
+
+                                                        }
+                                                        else
+                                                        {
+                                                              r_battle = true;
+                                                        }
                                                         menu_text = "";
                                                         info_dialog(menu_text);
                                                         break;
 						default:break;
 					}
 			}
+                }
+                else if(r_battle) {
+			switch(event.type) {
+				case SDL_QUIT: Game::run=false; break;
+
+				case SDL_KEYDOWN:
+					switch(event.key.keysym.sym) {
+						case SDLK_w:	if(move_choice) --poke_choice; else poke_choice=3;		break;
+
+						case SDLK_s:	if(move_choice<3) ++poke_choice; else poke_choice=0;	break;
+
+						case SDLK_e:
+							switch(poke_choice) {
+                                                          // MOVES NOT IMPLEMENTED YET!
+                                                          default:
+                                                                  break;
+							}
+						break;
+
+						case SDLK_SPACE:
+                                                        r_pokemenu=false;
+                                                        r_menu = true;
+                                                        menu_text = "";
+                                                        info_dialog(menu_text);
+                                                        break;
+						default:break;
+					}
+                        }
                 }
 		else {
 			switch(event.type) {

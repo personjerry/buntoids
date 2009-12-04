@@ -74,6 +74,7 @@ void pokemon_init() { //do we want to make our own pokemon?
 
 	monsters.reserve(POKECOUNT+1);
         poseimg.reserve(POKECOUNT+1);
+        rposeimg.reserve(POKECOUNT+1);
         battleimg.reserve(POKECOUNT+1);
         iconimg.reserve(POKECOUNT+1);
 

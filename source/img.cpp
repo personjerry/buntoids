@@ -8,6 +8,7 @@
 
 std::map<int,Image> imglist;
 std::vector<Image> poseimg;
+std::vector<Image> rposeimg;
 std::vector<Image> battleimg;
 std::vector<Image> iconimg;
 
