@@ -3,7 +3,7 @@ OBJS=$(patsubst %.cpp,%.o,$(wildcard *.cpp))
 ARCH=`uname -m`
 
 PLATFORM=Linux
-PROG=pokemon
+PROG=buntoids
 DEST=../$(PROG)_$(ARCH)
 
 LFLAGS=	`sdl-config --libs` -lSDL_image -lSDL_ttf -lSDL_gfx -lopenal -lvorbisfile

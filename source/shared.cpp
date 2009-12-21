@@ -23,7 +23,8 @@ void warning(const std::string& msg) {
 namespace Game {
 	bool run=true;
 	std::string map;
-	std::string spritemod("modern");
+        //Removed Spritemod but left base just in case we use it sometime.
+ 	std::string spritemod("");
 }
 
 namespace Video {
