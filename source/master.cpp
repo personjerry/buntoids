@@ -7,10 +7,12 @@
 #include "file.h"
 #include "sound.h"
 #include "master.h"
+#include "move.h"
 
 void master_init() {
 	srand(convert<unsigned int>(time(NULL)));
 	sdlvideo_init();
+        move_init();
   	pokemon_init();
 	openal_init();
 	col_init();

@@ -1,6 +1,10 @@
 #ifndef _MOVE_
 #define _MOVE_
 #include <string>
+#include <vector>
+#include <fstream>
+#include <iostream>
+#include <cstdlib>
 
 struct Move {
         int id;
@@ -10,6 +14,8 @@ struct Move {
         int acc;
         int pp;
 };
+extern std::vector<Move> moves;
+extern void move_init();
 
 #endif
 
