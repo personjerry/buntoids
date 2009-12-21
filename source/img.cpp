@@ -13,7 +13,7 @@ std::vector<Image> battleimg;
 std::vector<Image> iconimg;
 
 void Image::load(std::string id) {
-	std::string file("data/gfx/"+Game::spritemod+"/"+id+Format::image);
+	std::string file("data/gfx/"+id+Format::image);
 
 	SDL_Surface *tmp=IMG_Load(file.c_str());
 	if(!tmp)
@@ -27,7 +27,7 @@ void Image::load(std::string id) {
 void Image::load(int id) {
 	std::ostringstream ss;
 	ss<<id;
-	std::string file("data/gfx/"+Game::spritemod+"/"+ss.str()+Format::image);
+	std::string file("data/gfx/"+ss.str()+Format::image);
 
 	SDL_Surface *tmp=IMG_Load(file.c_str());
 	if(!tmp)
