@@ -16,13 +16,14 @@ struct Poke {
         double att_per_lvl;
         double defense;
         double def_per_lvl;
-        Move moves[4];
+        int moven[4];
 };
 
 extern std::vector<Poke> monsters;
 extern Poke party[6];
 extern Poke EMPTY;
 extern Poke fight;
+extern int pokecount;
 
 void pokemon_init();
 

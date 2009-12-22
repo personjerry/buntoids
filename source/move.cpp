@@ -1,18 +1,18 @@
 #include "move.h"
 std::vector<Move> moves;
-                    std::string name;
+unsigned int movecount;
+
 void move_init()
 {
 	std::ifstream f("data/moves.txt");
         if(f)
         {
-              int nmoves;
-              f >> nmoves;
-              for(;nmoves > 0; nmoves--)
+              f >> movecount;
+              for(int nmoves = 1;nmoves <= movecount; nmoves++)
               {
                     Move temp;
                     temp.id = nmoves;
-
+                    std::string name;
                     char in = '\0';
                     while(in != '.')
                     {
@@ -27,6 +27,7 @@ void move_init()
                             }
                     }
                     temp.name = name;
+                    temp.id = nmoves;
                     f >> temp.type >> temp.power >> temp.acc >> temp.pp;
               }
         }

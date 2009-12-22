@@ -7,6 +7,7 @@ std::vector<Poke> monsters;
 Poke party[6];
 Poke EMPTY;
 Poke fight;
+int pokecount;
 
 void loadpoke(const std::string& name) {
 	static int id=0;
@@ -76,16 +77,75 @@ void pokemon_init() { //do we want to make our own pokemon?
 		"Zubat","Golbat",
 		"Oddish","Gloom","Vileplume"
 	};
+        
+        std::ifstream f("data/poke.txt");
+        if(f)
+        {
+              f >> pokecount;
+          
+              monsters.reserve(pokecount+1);    //pokemon
+              poseimg.reserve(pokecount+1);     //pictures of pokemon facing, to the right
+              rposeimg.reserve(pokecount+1);    //pictures of pokemon facing, reversed
+              battleimg.reserve(pokecount+1);   //pictures of from the rear
+              iconimg.reserve(pokecount+1);     //small icons of the pokemon
+          
+		for(int npoke=0;npoke < pokecount; npoke++)
+		{
+			Poke temp;
 
-	monsters.reserve(POKECOUNT+1);
-        poseimg.reserve(POKECOUNT+1);
-        rposeimg.reserve(POKECOUNT+1);
-        battleimg.reserve(POKECOUNT+1);
-        iconimg.reserve(POKECOUNT+1);
+			std::string name;
+			f >> name;
+                
+			temp.id = npoke;
+			temp.name = name;
+			temp.level = 1;
+			f >> temp.health;
+			f >> temp.hp_per_lvl;
+			f >> temp.attack;
+			f >> temp.att_per_lvl;
+			f >> temp.defense;
+			f >> temp.def_per_lvl;
+			f >> temp.moven[0];
+			f >> temp.moven[1];
+			f >> temp.moven[2];
+			f >> temp.moven[3];
+                    
+                
+			std::ostringstream img1, img2, img3;
+			img1<<npoke+1<<"_pose";
+			img2<<npoke+1<<"_battle";
+			img3<<npoke+1<<"_icon";
+                
+			std::ostringstream loc1, loc2, loc3;
 
-	for(int i=0; i<19; ++i) {
-		loadpoke(monster_names[i]);
-	}
+			loc1 << "pokemon/" << img1.str();
+			Image * temp1 = new Image;
+			temp1->load(loc1.str());
+			poseimg[npoke] = *temp1;
+			delete(temp1);
+                    
+			rposeimg[npoke].set((SDL_Surface*)(zoomSurface(poseimg[npoke].get(),-1,1,1)));
+	
+			loc2 << "pokemon/" << img2.str();
+			Image * temp2 = new Image;
+			temp2->load(loc2.str());
+			battleimg[npoke] = *temp2;
+			delete(temp2);
+                    
+			loc3<< "pokemon/" << img3.str();
+			Image * temp3 = new Image;
+			temp3->load(loc3.str());
+			iconimg[npoke] = *temp3;
+			delete(temp3);
+			
+			monsters.push_back(temp);
+		}
+        }
+        else
+        {
+                std::cerr<<"Pokemon file not found... Abort!\n";
+                exit(1);
+        }
         
         
         // make sure the empty pokemon is consistent.
@@ -103,7 +163,6 @@ void pokemon_init() { //do we want to make our own pokemon?
         party[5] = EMPTY;
           
         // testing with all bulbasaurs.
-        setpokemon(&(monsters[0]),1,1,20,2,5,1.3,8,2.1);
         party[0] = monsters[0];
         party[1] = monsters[0];
         party[2] = monsters[0];

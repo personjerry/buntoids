@@ -15,6 +15,7 @@ struct Move {
         int pp;
 };
 extern std::vector<Move> moves;
+extern unsigned int movecount;
 extern void move_init();
 
 #endif
