@@ -56,28 +56,8 @@ void setpokemon(Poke* target,int id, int level, double health, double hp_per_lvl
         target->def_per_lvl = def_per_lvl;
 }
 
-void pokemon_init() { //do we want to make our own pokemon?
-	const static std::string monster_names[]={
-		"Bulbasaur","Ivysaur","Venusaur",
-		"Charmander","Charmeleon","Charizard",
-		"Squirtle","Wartortle","Blastoise",
-		"Caterpie","Metapod","Butterfree",
-		"Weedle","Kakuna","Beedrill",
-		"Pidgey","Pidgeotto","Pidgeot",
-		"Rattata","Raticate",
-		"Spearow","Fearow",
-		"Ekans","Arbok",
-		"Pikachu","Raichu",
-		"Sandshrew","Sandslash",
-		"Nidoran ♀","Nidorina","Nidoqueen",
-		"Nidoran ♂","Nidorino","Nidoking",
-		"Clefairy","Clefable",
-		"Vulpix","Ninetales",
-		"Jigglypuff","Wigglytuff",
-		"Zubat","Golbat",
-		"Oddish","Gloom","Vileplume"
-	};
-        
+void pokemon_init() { 
+	//do we want to make our own pokemon?        
         std::ifstream f("data/poke.txt");
         if(f)
         {
