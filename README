@@ -1,4 +1,4 @@
-Free Pokémon remake written in 2008 by Robin Stjerndorff.
+Free Pokemon remake started in 2008 by Robin Stjerndorff.
 Currently in development (2009) by Jerry Liu (personjerry), Elliot Speck/Kylar Thorne (Zayfox) and *Put your name here if you want :)*.
 
 Be sure to contribute too!
@@ -8,5 +8,5 @@ Compiling:
 Alternatively, use "make -f Makefile.w32" if you are using Windows/MinGW.
 
 License: GPLv3
-Necessary compilation libraries: libsdl libsdl_image libsdl_ttf libsdl_gfx libopenal libvorbisfile
+Necessary compilation DEVELOPMENT libraries: libsdl libsdl_image libsdl_ttf libsdl_gfx libopenal libvorbisfile libalut
 
