@@ -105,10 +105,35 @@ std::string Music::errstr(int code) {
 	switch(code) {
 		case OV_EREAD:		return "Read from media";
 		case OV_ENOTVORBIS:	return "Not Vorbis data";
-		case OV_EVERSION:	return "Vorbis version mismatch";
+		case OV_EVERSION:		return "Vorbis version mismatch";
 		case OV_EBADHEADER:	return "Invalid Vorbis header";
 		case OV_EFAULT:		return "Internal logic fault (bug or heap/stack corruption)";
+		case OV_FALSE:		return "Playback not in progress";
+		case OV_HOLE:		return "Interrupion in data (garbage info, loss of sync, or corruption)";
+		case OV_EIMPL:		return "Unavailable features attempted to be used";
+		case OV_ENOTAUDIO:		return "Not audio data";
+		case OV_ENOSEEK:		return "Bitstream not seekable";
+		case OV_EINVAL:		return "Invalid argument for libvorbis";
+		case OV_EBADPACKET:	return "Invalid packet to synethesis";
+		case OV_EBADLINK:		return "Invalid stream or link is corrupt";
 		default:			return "Unknown Ogg error";
 	}
 }
 
+void newSong(const std::string& song)
+{
+	static std::string old_song = "";
+	if(song.size()) {
+
+		if(song!=old_song) {
+			if(musiclist.size()) {
+				delete musiclist.back();
+				musiclist.pop_back();
+			}
+
+			musiclist.push_back(new Music("data/sfx/music/"+song));
+			musiclist.back()->play();
+			old_song=song;
+		}
+	}
+}

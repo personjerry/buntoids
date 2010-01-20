@@ -47,11 +47,13 @@ class Music {
 		void load(const std::string&);
 		void info();
 		void play();
+
 		bool playing();
 		bool update();
 };
 
 extern std::vector<Music*> musiclist;
+extern void newSong(const std::string& song);
 
 #endif
 

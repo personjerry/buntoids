@@ -92,19 +92,7 @@ void loadmap(std::string tmp) {
 		loadimage(mapimgs[i]);
 	}
 
-	if(song.size()) {
-		static std::string old_song;
-		if(song!=old_song) {
-			if(musiclist.size()) {
-				delete musiclist.back();
-				musiclist.pop_back();
-			}
-
-			musiclist.push_back(new Music("data/sfx/music/"+song));
-			musiclist.back()->play();
-			old_song=song;
-		}
-	}
+	newSong(song);
 
 	int k=0;
 	for(int x=0; x<sqrt(double(tmp_map.size())); ++x) {
