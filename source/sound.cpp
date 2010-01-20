@@ -85,6 +85,7 @@ bool openal_init() {
 
 	soundbuffers.push_back(new SoundBuffer("data/sfx/01.ogg"));
 	soundbuffers.push_back(new SoundBuffer("data/sfx/02.ogg"));
+	soundbuffers.push_back(new SoundBuffer("data/sfx/03.ogg"));
 
 	return false;
 }
