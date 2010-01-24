@@ -13,7 +13,7 @@ extern bool r_battle;
 extern bool battle;
 extern int menu_choice;
 extern int poke_choice;
-extern int move_choice;
+extern int battle_choice;
 extern std::string menu_text;
 
 extern int fading;

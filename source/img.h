@@ -24,7 +24,6 @@ class Image {
 
 extern std::map<int,Image> imglist;
 extern std::vector<Image> poseimg;
-extern std::vector<Image> rposeimg;
 extern std::vector<Image> battleimg;
 extern std::vector<Image> iconimg;
 

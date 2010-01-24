@@ -7,6 +7,7 @@ std::vector<Poke> monsters;
 Poke party[6];
 Poke EMPTY;
 Poke fight;
+Poke def;
 int pokecount;
 
 void loadpoke(const std::string& name) {
@@ -27,9 +28,6 @@ void loadpoke(const std::string& name) {
         temp1->load(loc1.str());
         poseimg[id] = *temp1;
         delete(temp1);
-        
-        rposeimg[id].set((SDL_Surface*)(zoomSurface(poseimg[id].get(),-1,1,1)));
-
         loc2 << "pokemon/" << img2.str();
         Image * temp2 = new Image;
         temp2->load(loc2.str());
@@ -65,7 +63,6 @@ void pokemon_init() {
           
               monsters.reserve(pokecount+1);    //pokemon
               poseimg.reserve(pokecount+1);     //pictures of pokemon facing, to the right
-              rposeimg.reserve(pokecount+1);    //pictures of pokemon facing, reversed
               battleimg.reserve(pokecount+1);   //pictures of from the rear
               iconimg.reserve(pokecount+1);     //small icons of the pokemon
           
@@ -104,7 +101,6 @@ void pokemon_init() {
 			poseimg[npoke] = *temp1;
 			delete(temp1);
                     
-			rposeimg[npoke].set((SDL_Surface*)(zoomSurface(poseimg[npoke].get(),-1,1,1)));
 	
 			loc2 << "pokemon/" << img2.str();
 			Image * temp2 = new Image;

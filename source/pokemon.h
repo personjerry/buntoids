@@ -23,6 +23,7 @@ extern std::vector<Poke> monsters;
 extern Poke party[6];
 extern Poke EMPTY;
 extern Poke fight;
+extern Poke def;
 extern int pokecount;
 
 void pokemon_init();

@@ -24,7 +24,7 @@ bool r_battle=0;
 bool battle=0;
 int menu_choice=0;
 int poke_choice=0;
-int move_choice=0;
+int battle_choice=0;
 std::string menu_text;
 
 int fading;
@@ -125,7 +125,7 @@ void sdlvideo_init() {
 		loadimage(i);
 
 	//GUI
-	for(int i=500; i<509; ++i)
+	for(int i=500; i<512; ++i)
 		loadimage(i);
 }
 
@@ -177,6 +177,25 @@ void sdlvideo_update() {
                 
         }
         else if(r_battle) {
+		imglist[511].draw_static(0,0);
+		switch(battle_choice)
+		{
+			case 0:
+				imglist[510].draw_static(0,102);
+			break;
+			case 1:
+				imglist[510].draw_static(0,123);				
+			break;
+			case 2:
+				imglist[510].draw_static(42,102);
+			break;
+			case 3:
+				imglist[510].draw_static(42,123);
+			break;
+		}
+		imglist[509].draw_static(0,102);
+		poseimg[fight.id].draw_static(104,0);
+		battleimg[def.id].draw_static(0,42);
                 
         }
         

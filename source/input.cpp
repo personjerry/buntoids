@@ -19,6 +19,7 @@ void input_update() {
                                 r_battle=true;
                                 battle=true;
                                 fight = monsters[0];
+				def = party[0];
 				soundevents.push_back(new Sound(soundbuffers[2]));
 				soundevents.back()->play();
 				newSong("00.ogg");
@@ -105,22 +106,36 @@ void input_update() {
 
 				case SDL_KEYDOWN:
 					switch(event.key.keysym.sym) {
-						case SDLK_w:	if(move_choice) --poke_choice; else poke_choice=3;		break;
-
-						case SDLK_s:	if(move_choice<3) ++poke_choice; else poke_choice=0;	break;
+						
+						case SDLK_w:
+						case SDLK_s:
+							battle_choice = (battle_choice + 1 ) % 2 + (battle_choice > 1) * 2;
+						break;
+						
+						case SDLK_a:
+						case SDLK_d:
+							battle_choice = (battle_choice + 2) % 4;
+						break;
 
 						case SDLK_e:
-							switch(poke_choice) {
-                                                          // MOVES NOT IMPLEMENTED YET!
-                                                          default:
-                                                                  break;
+							switch(battle_choice) {
+								
+							case 2: // delegate choosing pokemon to pokemenu
+								r_pokemenu=true;
+								r_menu = false;
+								menu_text = "Choose a buntoid.";
+								info_dialog(menu_text);
+                                                        break;
+							
+                                                         default: // MOVES NOT IMPLEMENTED YET!
+							break;
 							}
 						break;
 
 						case SDLK_SPACE:
-                                                        r_pokemenu=false;
-                                                        r_menu = true;
-                                                        menu_text = "";
+                                                        r_pokemenu=true;
+                                                        r_menu = false;
+                                                        menu_text = "Choose a buntoid.";
                                                         info_dialog(menu_text);
                                                         break;
 						default:break;
