@@ -20,8 +20,6 @@ void input_update() {
                                 battle=true;
                                 fight = monsters[0];
 				def = party[0];
-				soundevents.push_back(new Sound(soundbuffers[2]));
-				soundevents.back()->play();
 				newSong("00.ogg");
                                 default:
 				break;

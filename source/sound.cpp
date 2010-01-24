@@ -83,9 +83,8 @@ bool openal_init() {
 	alFilterf(uiFilter,AL_LOWPASS_GAIN,1.0f);
 	alFilterf(uiFilter,AL_LOWPASS_GAINHF,0.1f);
 
+	soundbuffers.push_back(new SoundBuffer("data/sfx/00.ogg"));
 	soundbuffers.push_back(new SoundBuffer("data/sfx/01.ogg"));
-	soundbuffers.push_back(new SoundBuffer("data/sfx/02.ogg"));
-	soundbuffers.push_back(new SoundBuffer("data/sfx/03.ogg"));
 
 	return false;
 }
