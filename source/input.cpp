@@ -107,7 +107,7 @@ void input_update() {
 						
 						case SDLK_w:
 						case SDLK_s:
-							battle_choice = (battle_choice + 1 ) % 2 + (battle_choice > 1) * 2;
+							battle_choice = ((battle_choice + 1 ) % 2 + (battle_choice > 1) * 2);
 						break;
 						
 						case SDLK_a:
@@ -118,6 +118,10 @@ void input_update() {
 						case SDLK_e:
 							switch(battle_choice) {
 								
+							case 0:
+								battle_choice = 4;
+							break;
+							
 							case 2: // delegate choosing pokemon to pokemenu
 								r_pokemenu=true;
 								r_menu = false;

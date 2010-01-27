@@ -8,7 +8,7 @@ void move_init()
         if(f)
         {
               f >> movecount;
-              for(int nmoves = 1;nmoves <= movecount; nmoves++)
+              for(unsigned int nmoves = 0;nmoves < movecount; nmoves++)
               {
                     Move temp;
                     temp.id = nmoves;
@@ -21,7 +21,7 @@ void move_init()
                             {
                                   name.push_back(' ');
                             }
-                            else
+                            else if (in != '.')
                             {
                                   name.push_back(in);
                             }
@@ -29,6 +29,7 @@ void move_init()
                     temp.name = name;
                     temp.id = nmoves;
                     f >> temp.type >> temp.power >> temp.acc >> temp.pp;
+		    moves.push_back(temp);
               }
         }
         else

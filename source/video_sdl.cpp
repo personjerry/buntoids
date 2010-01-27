@@ -17,6 +17,7 @@ SDL_Surface *screen;
 
 SDL_Surface *text=NULL, *text2=NULL;
 TTF_Font *font;
+TTF_Font *bfont;
 
 bool r_menu=0;
 bool r_pokemenu=0;
@@ -30,6 +31,8 @@ std::string menu_text;
 int fading;
 
 std::queue<std::string> lines;
+
+const static SDL_Color white={255,255,255,0};
 
 bool info_dialog(std::string& say) {
 
@@ -72,8 +75,6 @@ bool info_dialog(std::string& say) {
 		return true;
 	}
 
-	const static SDL_Color white={255,255,255,0};
-
 	soundevents.push_back(new Sound(soundbuffers[0]));
 	soundevents.back()->play();
 
@@ -112,6 +113,10 @@ void sdlvideo_init() {
 	font=TTF_OpenFont("data/sans.ttf",10);
 	if(!font)
 		error(TTF_GetError());
+	
+	bfont=TTF_OpenFont("data/battle.ttf",16);
+	if(!bfont)
+		error(TTF_GetError());
 
 	screen=SDL_SetVideoMode(Video::width*Video::scale,Video::height*Video::scale,0,/*SDL_DOUBLEBUF|*/(Video::fullscreen?SDL_FULLSCREEN:0));
 	SDL_WM_SetCaption("Pokemon","Pokemon");
@@ -125,7 +130,7 @@ void sdlvideo_init() {
 		loadimage(i);
 
 	//GUI
-	for(int i=500; i<512; ++i)
+	for(int i=500; i<513; ++i)
 		loadimage(i);
 }
 
@@ -177,25 +182,68 @@ void sdlvideo_update() {
                 
         }
         else if(r_battle) {
+		
 		imglist[511].draw_static(0,0);
-		switch(battle_choice)
-		{
-			case 0:
-				imglist[510].draw_static(0,102);
-			break;
-			case 1:
-				imglist[510].draw_static(0,123);				
-			break;
-			case 2:
-				imglist[510].draw_static(42,102);
-			break;
-			case 3:
-				imglist[510].draw_static(42,123);
-			break;
-		}
-		imglist[509].draw_static(0,102);
 		poseimg[fight.id].draw_static(104,0);
 		battleimg[def.id].draw_static(0,42);
+		
+		if (battle_choice < 4)
+		{
+			switch(battle_choice)
+			{
+				case 0:
+					imglist[510].draw_static(0,102);
+				break;
+				case 1:
+					imglist[510].draw_static(0,123);				
+				break;
+				case 2:
+					imglist[510].draw_static(42,102);
+				break;
+				case 3:
+					imglist[510].draw_static(42,123);
+				break;
+				default:
+					error("Battle menu error.");
+				break;
+			}
+			imglist[509].draw_static(0,102);
+
+		}
+		else
+		{
+			static Image movesurf;
+			static Poke *prev = NULL;
+			if (prev != &def)
+			{
+				prev = &def;
+				
+				movesurf.set(new SDL_Surface(*imglist[512].get()));	
+				
+				SDL_Rect pos;
+				pos.x = 1;
+				pos.y = 0;
+				
+				SDL_Surface* reblit;
+				
+				reblit=TTF_RenderUTF8_Blended(bfont,moves[def.moven[0]].name.c_str(),white);
+				SDL_BlitSurface(reblit,0,movesurf.get(),&pos);
+				pos.x = 82;
+				
+				reblit=TTF_RenderUTF8_Blended(bfont,moves[def.moven[1]].name.c_str(),white);
+				SDL_BlitSurface(reblit,0,movesurf.get(),&pos);
+				pos.y = 21;
+				
+				reblit=TTF_RenderUTF8_Blended(bfont,moves[def.moven[2]].name.c_str(),white);
+				SDL_BlitSurface(reblit,0,movesurf.get(),&pos);
+				pos.x = 0;
+				
+				reblit=TTF_RenderUTF8_Blended(bfont,moves[def.moven[3]].name.c_str(),white);
+				SDL_BlitSurface(reblit,0,movesurf.get(),&pos);
+			}
+			movesurf.draw_static(0,102);
+
+		}
                 
         }
         
