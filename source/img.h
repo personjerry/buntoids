@@ -19,7 +19,7 @@ class Image {
 		void draw(const Sint16,const Sint16);
 		void draw_static(const Sint16,const Sint16);
                 SDL_Surface * get() {return surface;};
-                void set(SDL_Surface * to){surface = to;};
+                void set(SDL_Surface * to){if(surface != NULL)SDL_FreeSurface(surface);surface = to;};
 };
 
 extern std::map<int,Image> imglist;

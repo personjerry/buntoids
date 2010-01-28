@@ -33,6 +33,7 @@ int fading;
 std::queue<std::string> lines;
 
 const static SDL_Color white={255,255,255,0};
+const static SDL_Color green={0x23,0xa9,0x22,0};
 
 bool info_dialog(std::string& say) {
 
@@ -122,15 +123,15 @@ void sdlvideo_init() {
 	SDL_WM_SetCaption("Pokemon","Pokemon");
 
 	//player
-	for(int i=100; i<110; ++i)
+	for(int i=100; i<=109; ++i)
 		loadimage(i);
 
 	//Bot
-	for(int i=110; i<130; ++i)
+	for(int i=110; i<=129; ++i)
 		loadimage(i);
 
 	//GUI
-	for(int i=500; i<513; ++i)
+	for(int i=500; i<=512; ++i)
 		loadimage(i);
 }
 
@@ -187,6 +188,7 @@ void sdlvideo_update() {
 		poseimg[fight.id].draw_static(104,0);
 		battleimg[def.id].draw_static(0,42);
 		
+		
 		if (battle_choice < 4)
 		{
 			switch(battle_choice)
@@ -212,36 +214,28 @@ void sdlvideo_update() {
 		}
 		else
 		{
-			static Image movesurf;
-			static Poke *prev = NULL;
-			if (prev != &def)
-			{
-				prev = &def;
+			imglist[512].draw_static(0,102);
 				
-				movesurf.set(new SDL_Surface(*imglist[512].get()));	
-				
-				SDL_Rect pos;
-				pos.x = 1;
-				pos.y = 0;
-				
-				SDL_Surface* reblit;
-				
-				reblit=TTF_RenderUTF8_Blended(bfont,moves[def.moven[0]].name.c_str(),white);
-				SDL_BlitSurface(reblit,0,movesurf.get(),&pos);
-				pos.x = 82;
-				
-				reblit=TTF_RenderUTF8_Blended(bfont,moves[def.moven[1]].name.c_str(),white);
-				SDL_BlitSurface(reblit,0,movesurf.get(),&pos);
-				pos.y = 21;
-				
-				reblit=TTF_RenderUTF8_Blended(bfont,moves[def.moven[2]].name.c_str(),white);
-				SDL_BlitSurface(reblit,0,movesurf.get(),&pos);
-				pos.x = 0;
-				
-				reblit=TTF_RenderUTF8_Blended(bfont,moves[def.moven[3]].name.c_str(),white);
-				SDL_BlitSurface(reblit,0,movesurf.get(),&pos);
-			}
-			movesurf.draw_static(0,102);
+			SDL_Rect pos;
+			pos.x = 1;
+			pos.y = 102;
+			
+			SDL_Surface* reblit;
+			
+			reblit=TTF_RenderUTF8_Blended(bfont,moves[def.moven[0]].name.c_str(),battle_choice==4?green:white);
+			SDL_BlitSurface(reblit,0,screen,&pos);
+			pos.x = 82;
+			
+			reblit=TTF_RenderUTF8_Blended(bfont,moves[def.moven[1]].name.c_str(),battle_choice==6?green:white);
+			SDL_BlitSurface(reblit,0,screen,&pos);
+			pos.y = 123;
+			
+			reblit=TTF_RenderUTF8_Blended(bfont,moves[def.moven[2]].name.c_str(),battle_choice==7?green:white);
+			SDL_BlitSurface(reblit,0,screen,&pos);
+			pos.x = 1;
+			
+			reblit=TTF_RenderUTF8_Blended(bfont,moves[def.moven[3]].name.c_str(),battle_choice==5?green:white);
+			SDL_BlitSurface(reblit,0,screen,&pos);
 
 		}
                 

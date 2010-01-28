@@ -107,12 +107,12 @@ void input_update() {
 						
 						case SDLK_w:
 						case SDLK_s:
-							battle_choice = ((battle_choice + 1 ) % 2 + (battle_choice > 1) * 2);
+							battle_choice = (((battle_choice % 4) + 1 ) % 2 + ((battle_choice % 4) > 1) * 2)+ (battle_choice>3)*4;
 						break;
 						
 						case SDLK_a:
 						case SDLK_d:
-							battle_choice = (battle_choice + 2) % 4;
+							battle_choice = (((battle_choice % 4)+ 2) % 4) + ((battle_choice>3)*4);
 						break;
 
 						case SDLK_e:
@@ -120,6 +120,12 @@ void input_update() {
 								
 							case 0:
 								battle_choice = 4;
+							break;
+							
+							case 1:
+							case 3:
+								menu_text = "Not implemented yet.";
+								info_dialog(menu_text);
 							break;
 							
 							case 2: // delegate choosing pokemon to pokemenu
@@ -135,12 +141,21 @@ void input_update() {
 						break;
 
 						case SDLK_SPACE:
-                                                        r_pokemenu=true;
-                                                        r_menu = false;
-                                                        menu_text = "Choose a buntoid.";
-                                                        info_dialog(menu_text);
+							if ( battle_choice < 4)
+							{
+								r_pokemenu=true;
+								r_menu = false;
+								menu_text = "Choose a buntoid.";
+								info_dialog(menu_text);
+							}
+							else
+							{
+								battle_choice = 0;
+							}
                                                         break;
-						default:break;
+							
+						default:
+							break;
 					}
                         }
                 }

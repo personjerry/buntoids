@@ -60,6 +60,7 @@ void Image::draw_static(const Sint16 x, const Sint16 y) {
 
 void Image::free() {
 	SDL_FreeSurface(surface);
+	surface = NULL;
 }
 
 void loadimage(const int &id) {
