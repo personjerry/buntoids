@@ -9,6 +9,41 @@
 #include <SDL/SDL.h>
 
 bool KEY_E_DOWN=false;
+bool KEY_W_DOWN=false;
+bool KEY_A_DOWN=false;
+bool KEY_S_DOWN=false;
+bool KEY_D_DOWN=false;
+
+bool check_movement()
+{
+	bool key = false;
+	
+	if (KEY_W_DOWN)
+	{
+		if(!player.talking)
+			player.start(8);
+		key = true;
+	}
+	else if (KEY_A_DOWN)
+	{
+		if(!player.talking)
+			player.start(4);
+		key = true;
+	}
+	else if (KEY_S_DOWN)
+	{
+		if(!player.talking)
+			player.start(16);
+		key = true;
+	}
+	else if (KEY_D_DOWN)
+	{
+		if(!player.talking)
+			player.start(2);
+		key = true;
+	}
+	return key;
+}
 
 void input_update() {
 	SDL_Event event;
@@ -165,13 +200,29 @@ void input_update() {
 
 				case SDL_KEYDOWN:
 					switch(event.key.keysym.sym) {
-						case SDLK_a:		if(!player.talking) player.start(4);	break;
+						case SDLK_a:	
+							KEY_A_DOWN = true;
+							if(!player.talking) 
+								player.start(4);
+						break;
 
-						case SDLK_w:		if(!player.talking) player.start(8);	break;
+						case SDLK_w:	
+							KEY_W_DOWN = true;
+							if(!player.talking)
+								player.start(8);
+						break;
 
-						case SDLK_s:		if(!player.talking) player.start(16);	break;
+						case SDLK_s:	
+							KEY_S_DOWN = true;
+							if(!player.talking) 
+								player.start(16);	
+						break;
 
-						case SDLK_d:		if(!player.talking) player.start(2);	break;
+						case SDLK_d:		
+							KEY_D_DOWN = true;
+							if(!player.talking) 
+								player.start(2);	
+						break;
 
 						case SDLK_e:		KEY_E_DOWN=true;	break;
 
@@ -189,13 +240,37 @@ void input_update() {
 
 				case SDL_KEYUP:
 					switch(event.key.keysym.sym) {
-						case SDLK_a:		if(player.direction()==4) player.stop();	break;
+						case SDLK_a:	
+							KEY_A_DOWN = false;
+							if(player.direction()==4 && !check_movement()) 
+							{
+								player.stop();
+							}
+							break;
 
-						case SDLK_w:		if(player.direction()==8) player.stop();	break;
+						case SDLK_w:	
+							KEY_W_DOWN = false;
+							if(player.direction()==8 && !check_movement())
+							{
+								player.stop();
+							}
+							break;
 
-						case SDLK_s:		if(player.direction()==16) player.stop();	break;
+						case SDLK_s:	
+							KEY_S_DOWN = false;
+							if(player.direction()==16 && !check_movement()) 
+							{
+								player.stop();
+							}
+							break;
 
-						case SDLK_d:		if(player.direction()==2) player.stop();	break;
+						case SDLK_d:	
+							KEY_D_DOWN = false;
+							if(player.direction()==2 && !check_movement())
+							{
+								player.stop();	
+							}
+							break;
 
 						case SDLK_e:		KEY_E_DOWN=false;							break;
 						default: break;

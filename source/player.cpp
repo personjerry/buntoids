@@ -1,5 +1,6 @@
 #include "player.h"
 #include "shared.h"
+#include "input.h"
 
 void Player::update() {
 	int extra=0, extra2=0;
@@ -54,6 +55,7 @@ void Player::turn(int where) {
 	std::fill_n(walk,4,false);
 	update();
 	stop();
+	check_movement();
 	talking=was_talking;
 }
 
