@@ -1,6 +1,6 @@
 5
-Chew. 2 50 90 20
-Big+Bite. 2 90 80 10
-Mushroom+Toss. 5 70 85 15
-Wiggle. 1 0 100 30
-Jump. 3 20 100 20
+Chew.			2	50 	90 	20
+Big+Bite.			2 	90 	80 	10
+Mushroom+Toss. 	5 	70	85 	15
+Wiggle.			1 	0 	100 	30
+Jump. 			3 	20 	100 	20

@@ -1,4 +1,5 @@
 #include "move.h"
+#include "type.h"
 std::vector<Move> moves;
 unsigned int movecount;
 

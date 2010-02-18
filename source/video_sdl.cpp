@@ -131,7 +131,7 @@ void sdlvideo_init() {
 		loadimage(i);
 
 	//GUI
-	for(int i=500; i<=512; ++i)
+	for(int i=500; i<=514; ++i)
 		loadimage(i);
 }
 
@@ -238,6 +238,8 @@ void sdlvideo_update() {
 			SDL_BlitSurface(reblit,0,screen,&pos);
 
 		}
+		imglist[513].draw_static(84,74);
+		imglist[514].draw_static(0,4);
                 
         }
         
