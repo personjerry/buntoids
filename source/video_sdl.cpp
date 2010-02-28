@@ -187,6 +187,7 @@ void sdlvideo_update() {
 		imglist[511].draw_static(0,0);
 		poseimg[fight.id].draw_static(104,0);
 		battleimg[def.id].draw_static(0,42);
+		imglist[513].draw_static(84,74);
 		
 		
 		if (battle_choice < 4)
@@ -238,7 +239,6 @@ void sdlvideo_update() {
 			SDL_BlitSurface(reblit,0,screen,&pos);
 
 		}
-		imglist[513].draw_static(84,74);
 		imglist[514].draw_static(0,4);
                 
         }

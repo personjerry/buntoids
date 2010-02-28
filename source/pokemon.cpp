@@ -42,7 +42,7 @@ void loadpoke(const std::string& name) {
         
         
 }
-void setpokemon(Poke* target,int id, int level, double health, double hp_per_lvl, double attack, double att_per_lvl, double defense, double def_per_lvl)
+void setpokemon(Poke* target,int id, int level, double health, double hp_per_lvl, double attack, double att_per_lvl, double defense, double def_per_lvl, double spa,double spalvl, double spd, double spdlvl)
 {
         target->level = level;
         target->id = id;
@@ -52,6 +52,10 @@ void setpokemon(Poke* target,int id, int level, double health, double hp_per_lvl
         target->att_per_lvl = att_per_lvl;
         target->defense = defense;
         target->def_per_lvl = def_per_lvl;
+	target->speca = spa;
+	target->speca_per_lvl = spalvl;
+	target->specd = spd;
+	target->specd_per_lvl = spdlvl;
 }
 
 void pokemon_init() { 
@@ -129,7 +133,7 @@ void pokemon_init() {
         
         
         // make sure the empty pokemon is consistent.
-        setpokemon(&EMPTY,0,0,0,0,0,0,0,0);
+        setpokemon(&EMPTY,0,0,0,0,0,0,0,0,0,0,0,0);
         EMPTY.name = "EMPTY";
         EMPTY.battle = "";
         EMPTY.pose = "";
