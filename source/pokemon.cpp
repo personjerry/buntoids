@@ -82,6 +82,10 @@ void pokemon_init() {
 			f >> temp.att_per_lvl;
 			f >> temp.defense;
 			f >> temp.def_per_lvl;
+			f >> temp.speca;
+			f >> temp.speca_per_lvl;
+			f >> temp.specd;
+			f >> temp.specd_per_lvl;
 			f >> temp.moven[0];
 			f >> temp.moven[1];
 			f >> temp.moven[2];

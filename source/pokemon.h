@@ -16,6 +16,12 @@ struct Poke {
         double att_per_lvl;
         double defense;
         double def_per_lvl;
+	double speca;
+	double speca_per_lvl;
+	double specd;
+	double specd_per_lvl;
+	double exp;
+	int curpp[4];
         int moven[4];
 };
 

@@ -1,0 +1,8 @@
+enum types
+{
+	TYPE_GHOST=0,	TYPE_NORMAL, 	TYPE_FIGHTING,
+	TYPE_FLYING, 		TYPE_FIRE, 		TYPE_GRASS, 
+	TYPE_WATER,
+	TYPE_END};
+	
+extern const double type[TYPE_END][TYPE_END];
