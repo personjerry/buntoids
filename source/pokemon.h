@@ -10,7 +10,7 @@ struct Poke {
 	std::string pose;
 	std::string battle;
         int level;
-        double health;
+        double maxhp;
         double hp_per_lvl;
         double attack;
         double att_per_lvl;
@@ -20,7 +20,8 @@ struct Poke {
 	double speca_per_lvl;
 	double specd;
 	double specd_per_lvl;
-	double exp;
+        int health;
+	int exp;
 	int curpp[4];
         int moven[4];
 };

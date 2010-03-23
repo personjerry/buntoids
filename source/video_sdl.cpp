@@ -166,7 +166,7 @@ void sdlvideo_update() {
 		imglist[503].draw_static(76,0);
 		imglist[105].draw_static(90,63);
 	}
-        else if(r_pokemenu) {
+        else if(r_pokemenu) { // Buntoid choice menu
                 imglist[505].draw_static(0,0);
                 if(poke_choice==0) {
                         imglist[506].draw_static(4,17);
@@ -182,7 +182,7 @@ void sdlvideo_update() {
                 }
                 
         }
-        else if(r_battle) {
+        else if(r_battle) { // draw things for battle
 		
 		imglist[511].draw_static(0,0);
 		poseimg[fight.id].draw_static(104,0);
@@ -241,6 +241,55 @@ void sdlvideo_update() {
 		}
 		imglist[514].draw_static(0,4);
                 
+                //// draw health for enemy buntoid
+                float pcentoff = (((float)fight.health)/fight.maxhp) ;
+                int color = 0;
+
+                if (pcentoff > 0.75)
+                {
+                  color = 0x00ff00ff;
+                }
+                else if (pcentoff > 0.5)
+                {
+                  color = 0xfde600ff;
+                }
+                else if (pcentoff > 0.25)
+                {
+                  color = 0xff8a00ff;
+                }
+                else
+                {
+                  color = 0xff0000ff;
+                }
+                  
+                pcentoff *= 65;
+                pcentoff += 5;
+                hlineColor(screen,5, pcentoff,33, color);
+                hlineColor(screen,5, pcentoff,34, color);
+                
+                //// draw health for player buntoid
+                pcentoff = (((float)def.health)/def.maxhp) ;
+                if (pcentoff > 0.75)
+                {
+                  color = 0x00ff00ff;
+                }
+                else if (pcentoff > 0.5)
+                {
+                  color = 0xfde600ff;
+                }
+                else if (pcentoff > 0.25)
+                {
+                  color = 0xff8a00ff;
+                }
+                else
+                {
+                  color = 0xff0000ff;
+                }
+                  
+                pcentoff *= 65;
+                pcentoff += 89;
+                hlineColor(screen,89, pcentoff,103, color);
+                hlineColor(screen,89, pcentoff,104, color);
         }
         
 

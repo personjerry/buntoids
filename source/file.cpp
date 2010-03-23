@@ -14,7 +14,7 @@ void savegame() {
 	}
         for(size_t i=0; i<6; ++i) {
                 if (party[i].name != "EMPTY")
-                f<<party[i].name<<' '<<party[i].pose<<' '<<party[i].battle<<' '<<party[i].level<<' '<<party[i].health<<' '<<party[i].hp_per_lvl<<' '<<party[i].attack<<' '<<party[i].att_per_lvl<<' '<<party[i].defense<<' '<<party[i].def_per_lvl << '\n';
+                f<<party[i].name<<' '<<party[i].pose<<' '<<party[i].battle<<' '<<party[i].level<<' '<<party[i].maxhp<<' '<<party[i].hp_per_lvl<<' '<<party[i].attack<<' '<<party[i].att_per_lvl<<' '<<party[i].defense<<' '<<party[i].def_per_lvl << '\n';
                 else
                 f<<"N/A\n";
 	}
@@ -49,7 +49,7 @@ void loadgame() {
                 for(size_t i=0; i<6; ++i) {
                       f>>party[i].name;
                       if (party[i].name != "N/A\n")
-                            f>>party[i].pose>>party[i].battle>>party[i].level>>party[i].health>>party[i].hp_per_lvl>>party[i].attack>>party[i].att_per_lvl>>party[i].defense>>party[i].def_per_lvl;
+                            f>>party[i].pose>>party[i].battle>>party[i].level>>party[i].maxhp>>party[i].hp_per_lvl>>party[i].attack>>party[i].att_per_lvl>>party[i].defense>>party[i].def_per_lvl;
                 }
         }
 }

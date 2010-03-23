@@ -54,6 +54,7 @@ void input_update() {
                                 r_battle=true;
                                 battle=true;
                                 fight = monsters[0];
+                                fight.health /= 2;
 				def = party[0];
 				newSong("00.ogg");
                                 default:
@@ -109,7 +110,7 @@ void input_update() {
 
 						case SDLK_e:
 							switch(menu_choice) {
-                                                          // POKEMON NOT IMPLEMENTED YET!
+                                                          // "VIEW POKEMON" NOT IMPLEMENTED YET!
                                                           default:
                                                                   break;
 							}

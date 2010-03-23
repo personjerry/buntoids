@@ -42,11 +42,11 @@ void loadpoke(const std::string& name) {
         
         
 }
-void setpokemon(Poke* target,int id, int level, double health, double hp_per_lvl, double attack, double att_per_lvl, double defense, double def_per_lvl, double spa,double spalvl, double spd, double spdlvl)
+void setpokemon(Poke* target,int id, int level, double maxhp, double hp_per_lvl, double attack, double att_per_lvl, double defense, double def_per_lvl, double spa,double spalvl, double spd, double spdlvl, double health, int exp)
 {
         target->level = level;
         target->id = id;
-        target->health = health;
+        target->maxhp = maxhp;
         target->hp_per_lvl = hp_per_lvl;
         target->attack = attack;
         target->att_per_lvl = att_per_lvl;
@@ -56,6 +56,8 @@ void setpokemon(Poke* target,int id, int level, double health, double hp_per_lvl
 	target->speca_per_lvl = spalvl;
 	target->specd = spd;
 	target->specd_per_lvl = spdlvl;
+        target->health = health;
+        target->exp = exp;
 }
 
 void pokemon_init() { 
@@ -80,7 +82,7 @@ void pokemon_init() {
 			temp.id = npoke;
 			temp.name = name;
 			temp.level = 1;
-			f >> temp.health;
+			f >> temp.maxhp;
 			f >> temp.hp_per_lvl;
 			f >> temp.attack;
 			f >> temp.att_per_lvl;
@@ -94,6 +96,9 @@ void pokemon_init() {
 			f >> temp.moven[1];
 			f >> temp.moven[2];
 			f >> temp.moven[3];
+                        
+                        // SET CURRENT HP OF POKEMON TO MAXHP
+                        temp.health = temp.maxhp;
                     
                 
 			std::ostringstream img1, img2, img3;
@@ -133,7 +138,7 @@ void pokemon_init() {
         
         
         // make sure the empty pokemon is consistent.
-        setpokemon(&EMPTY,0,0,0,0,0,0,0,0,0,0,0,0);
+        setpokemon(&EMPTY,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
         EMPTY.name = "EMPTY";
         EMPTY.battle = "";
         EMPTY.pose = "";
