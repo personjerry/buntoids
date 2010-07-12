@@ -205,11 +205,18 @@ void input_update() {
                         
                         // Check to see if it's a miss
                         bool miss = (rand() % 100 + 1) > attack_choosen.acc ? 1 : 0;
+			
+			static bool pressed = false; // we need to cancel every other press otherwise
+								     // the attack hits twice from dialog closing.
+								     // FIXME: See above.
 
+			if(!pressed)
+			{
                         if (!miss)
                         {
                             // Still no type check (no weakness imunities)
-                            fight.health -= attack_choosen.power;
+			    // TODO: Animate health bar.
+                            fight.health -= attack_choosen.power/(fight.defense+fight.specd);
 
                             menu_text = def.name + " used " + attack_choosen.name + "!";
                         }
@@ -217,13 +224,25 @@ void input_update() {
                             menu_text = "It missed.";
                         }
                         info_dialog(menu_text);
+			pressed = true;
+			}
+			else
+			{
+			info_dialog(menu_text);
+			pressed = false;
+			}
 
                     }
-
+			
                         if (fight.health <= 0)
                         {
-                            
+			    /* FIXME: Due to the way messages work we can't display both the
+			     * final attack message and the victory message at once, and the 
+			     * animations are missing too.
+			     */
+			    info_dialog(menu_text); //clear the attack message
                             menu_text = "YOU ARE WINNER!";
+			    info_dialog(menu_text);
 
 							// Doing this makes the program stop responding to input
                             // (although it's still possible to enter the battle screen
