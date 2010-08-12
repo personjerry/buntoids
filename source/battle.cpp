@@ -18,7 +18,7 @@ Battle::Battle(bool isWild, Poke defence, Poke opponent) {
 
 int Battle::remove_little_life_opponent() {
 	// Always remove 1 hitpoint during each passage
-	if (life_to_remove >= 0 && pk_opponent.health > 0) {
+	if (life_to_remove > 0 && pk_opponent.health > 0) {
 		pk_opponent.health -= 1;
 
 		fight = pk_opponent;
