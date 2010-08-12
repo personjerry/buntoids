@@ -32,10 +32,21 @@ public:
     void opponent_attacks();
     ~Battle() {};
 
+	int remove_little_life_opponent();
 private:
     Poke pk_defence;
     Poke pk_opponent;
     bool wild_battle;
+	
+	// If true, don't process anything during this passage of
+	// battle_input
+	// This is used so that the health bar can be decreased little by
+	// little without input from the user
+	bool dont_do_anything;
+
+	int life_to_remove;
+
+	void process_attack();
 };
 
 #endif /* _BATTLE_H_ */
