@@ -34,9 +34,9 @@ public:
 
 	int remove_little_life_opponent();
 private:
+    bool wild_battle;
     Poke pk_defence;
     Poke pk_opponent;
-    bool wild_battle;
 	
 	// If true, don't process anything during this passage of
 	// battle_input

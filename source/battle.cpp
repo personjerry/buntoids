@@ -1,11 +1,12 @@
 #include "battle.h"
+#include <cmath>
 
-Battle::Battle(bool isWild, Poke defence, Poke opponent) {
-	wild_battle = isWild;
-	pk_defence = defence;
-	pk_opponent = opponent;
-	dont_do_anything = false;
-
+Battle::Battle(bool isWild, Poke defence, Poke opponent) : wild_battle(isWild),
+														   pk_defence(defence),
+														   pk_opponent(opponent),
+														   dont_do_anything(false),
+														   life_to_remove(0)
+{
 	pk_opponent.health = (int)pk_opponent.maxhp;
 
 	// These variables are defined as extern, and are used on the
@@ -162,7 +163,7 @@ void Battle::process_attack() {
 
 			//fight = pk_opponent;
 
-			life_to_remove = attack_choosen.power / (fight.defense + fight.specd);
+			life_to_remove = (int)ceil(attack_choosen.power / (fight.defense + fight.specd));
 
 			menu_text = pk_defence.name + " used " + attack_choosen.name + "!";
 		}
