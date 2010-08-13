@@ -32,7 +32,8 @@ public:
     void opponent_attacks();
     ~Battle() {};
 
-	int remove_little_life_opponent();
+	int	remove_little_life_pk(int pk);
+
 private:
     bool wild_battle;
     Poke pk_defence;

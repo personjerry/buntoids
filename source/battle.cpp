@@ -17,17 +17,32 @@ Battle::Battle(bool isWild, Poke defence, Poke opponent) : wild_battle(isWild),
 	newSong("00.ogg");
 }
 
-int Battle::remove_little_life_opponent() {
+/* Remove a bit of the lifebar of a pokemon
+ * Arguments:
+ * pk = 0 -> Remove life from the pokemon that's facing the player
+ * pk = 1 -> Remove life from the pokemon that the player is controlling
+ */ 
+int Battle::remove_little_life_pk(int pk) {
 	// Always remove 1 hitpoint during each passage
-	if (life_to_remove > 0 && pk_opponent.health > 0) {
-		pk_opponent.health -= 1;
-
-		fight = pk_opponent;
-
-		life_to_remove -= 1;
+	if (pk == 0) {
+		if (life_to_remove > 0 && pk_opponent.health > 0) {
+			pk_opponent.health -= 1;
+			fight = pk_opponent;
+			life_to_remove -= 1;
+		}
+		else
+			dont_do_anything = false;
 	}
-	else
-		dont_do_anything = false;
+	else {
+		if (life_to_remove > 0 && pk_defence.health > 0) {
+			pk_defence.health -= 1;
+			def = pk_defence;
+			life_to_remove -= 1;
+		}
+		else
+			dont_do_anything = false;
+	}
+
 	return life_to_remove;
 }
 
@@ -35,7 +50,7 @@ int Battle::battle_input() {
 	SDL_Event event;
 
 	if (dont_do_anything) // Simply remove a little life from the bar
-		remove_little_life_opponent();
+		remove_little_life_pk(0);
 
 	else {
 		while (SDL_PollEvent(&event)) {
@@ -86,8 +101,10 @@ int Battle::battle_input() {
 					case 7:
 						process_attack();
 
-						// See if the opponent is dead
-						if (pk_opponent.health <= 0) {
+						//opponent_attacks();
+						
+						// See if anyone has lost
+						if (pk_opponent.health <= 0 || pk_defence.health <= 0) {
 							battle_end();
 							return 1;
 						}
@@ -159,9 +176,6 @@ void Battle::process_attack() {
 			// Still no type check (no weakness or imunities)
 			// TODO: Animate health bar.
 			dont_do_anything = true;
-			//pk_opponent.health -= attack_choosen.power / (fight.defense+fight.specd);
-
-			//fight = pk_opponent;
 
 			life_to_remove = (int)ceil(attack_choosen.power / (fight.defense + fight.specd));
 
@@ -200,4 +214,47 @@ void Battle::battle_end() {
 	dont_do_anything = false;
 }
 
-void Battle::opponent_attacks() {}
+void Battle::opponent_attacks() {
+	// TODO: This attack should be choosen randomly
+	int index = 0;
+	// There should be a way to get a move by simply
+	// searching for his name
+	Move attack_choosen = moves[pk_defence.moven[index]];
+
+	// TODO: Check if we have enought PP
+	/* FIXME: Since PP is defined on the global moves
+	 * vector, does this mean that all pokemons share
+	 * the same PP? At least the PP should be local to
+	 * each pokemon
+	 */
+
+	// Check to see if it's a miss
+	bool miss = (rand() % 100 + 1) > attack_choosen.acc ? 1 : 0;
+
+	// We need to cancel every other press otherwise the attack hits
+	// twice from dialog closing.
+	// FIXME: See above.
+	static bool pressed = false;
+
+	if (!pressed) {
+
+		if (!miss) {
+			// Still no type check (no weakness or imunities)
+			// TODO: Animate health bar.
+			dont_do_anything = true;
+
+			life_to_remove = (int)ceil(attack_choosen.power / (def.defense + def.specd));
+
+			menu_text = pk_opponent.name + " used " + attack_choosen.name + "!";
+		}
+		else {
+			menu_text = "It missed.";
+		}
+		info_dialog(menu_text);
+		pressed = true;
+	}
+	else {
+		info_dialog(menu_text);
+		pressed = false;
+	}
+}
