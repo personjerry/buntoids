@@ -20,7 +20,7 @@ struct Poke {
 	double speca_per_lvl;
 	double specd;
 	double specd_per_lvl;
-	int health;
+	double health;
 	int exp;
 	int curpp[4];
 	int moven[4];
