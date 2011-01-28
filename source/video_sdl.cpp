@@ -223,19 +223,19 @@ void sdlvideo_update() {
 			
 			SDL_Surface* reblit;
 			
-			reblit=TTF_RenderUTF8_Blended(bfont,moves[def.moven[0]].name.c_str(),battle_choice==4?green:white);
+			reblit=TTF_RenderUTF8_Blended(bfont,moves[def.moven[0]].getName().c_str(),battle_choice==4?green:white);
 			SDL_BlitSurface(reblit,0,screen,&pos);
 			pos.x = 82;
 			
-			reblit=TTF_RenderUTF8_Blended(bfont,moves[def.moven[1]].name.c_str(),battle_choice==6?green:white);
+			reblit=TTF_RenderUTF8_Blended(bfont,moves[def.moven[1]].getName().c_str(),battle_choice==6?green:white);
 			SDL_BlitSurface(reblit,0,screen,&pos);
 			pos.y = 123;
 			
-			reblit=TTF_RenderUTF8_Blended(bfont,moves[def.moven[2]].name.c_str(),battle_choice==7?green:white);
+			reblit=TTF_RenderUTF8_Blended(bfont,moves[def.moven[2]].getName().c_str(),battle_choice==7?green:white);
 			SDL_BlitSurface(reblit,0,screen,&pos);
 			pos.x = 1;
 			
-			reblit=TTF_RenderUTF8_Blended(bfont,moves[def.moven[3]].name.c_str(),battle_choice==5?green:white);
+			reblit=TTF_RenderUTF8_Blended(bfont,moves[def.moven[3]].getName().c_str(),battle_choice==5?green:white);
 			SDL_BlitSurface(reblit,0,screen,&pos);
 
 		}

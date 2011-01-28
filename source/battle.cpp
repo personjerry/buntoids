@@ -163,7 +163,7 @@ void Battle::process_attack() {
 	 */
 
 	// Check to see if it's a miss
-	bool miss = (rand() % 100 + 1) > attack_choosen.acc ? 1 : 0;
+	bool miss = (rand() % 100 + 1) > attack_choosen.getAcc() ? 1 : 0;
 
 	// We need to cancel every other press otherwise the attack hits
 	// twice from dialog closing.
@@ -177,9 +177,9 @@ void Battle::process_attack() {
 			// TODO: Animate health bar.
 			dont_do_anything = true;
 
-			life_to_remove = (int)ceil(attack_choosen.power / (fight.defense + fight.specd));
+			life_to_remove = (int)ceil(attack_choosen.getPower() / (fight.defense + fight.specd));
 
-			menu_text = pk_defence.name + " used " + attack_choosen.name + "!";
+			menu_text = pk_defence.name + " used " + attack_choosen.getName() + "!";
 		}
 		else {
 			menu_text = "It missed.";
@@ -229,7 +229,7 @@ void Battle::opponent_attacks() {
 	 */
 
 	// Check to see if it's a miss
-	bool miss = (rand() % 100 + 1) > attack_choosen.acc ? 1 : 0;
+	bool miss = (rand() % 100 + 1) > attack_choosen.getAcc() ? 1 : 0;
 
 	// We need to cancel every other press otherwise the attack hits
 	// twice from dialog closing.
@@ -243,9 +243,9 @@ void Battle::opponent_attacks() {
 			// TODO: Animate health bar.
 			dont_do_anything = true;
 
-			life_to_remove = (int)ceil(attack_choosen.power / (def.defense + def.specd));
+			life_to_remove = (int)ceil(attack_choosen.getPower() / (def.defense + def.specd));
 
-			menu_text = pk_opponent.name + " used " + attack_choosen.name + "!";
+			menu_text = pk_opponent.name + " used " + attack_choosen.getName() + "!";
 		}
 		else {
 			menu_text = "It missed.";
