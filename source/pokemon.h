@@ -5,25 +5,25 @@
 #include "move.h"
 
 struct Poke {
-        int id;
+	int id;
 	std::string name;
 	std::string pose;
 	std::string battle;
-        int level;
-        double maxhp;
-        double hp_per_lvl;
-        double attack;
-        double att_per_lvl;
-        double defense;
-        double def_per_lvl;
+	int level;
+	double maxhp;
+	double hp_per_lvl;
+	double attack;
+	double att_per_lvl;
+	double defense;
+	double def_per_lvl;
 	double speca;
 	double speca_per_lvl;
 	double specd;
 	double specd_per_lvl;
-        int health;
+	int health;
 	int exp;
 	int curpp[4];
-        int moven[4];
+	int moven[4];
 };
 
 extern std::vector<Poke> monsters;
