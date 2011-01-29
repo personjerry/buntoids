@@ -7,12 +7,12 @@ Battle::Battle(bool isWild, Poke defence, Poke opponent) : wild_battle(isWild),
 														   dont_do_anything(false),
 														   life_to_remove(0)
 {
-	pk_opponent.health = (int)pk_opponent.maxhp;
+	pk_opponent.setFullHealth();
 
 	// These variables are defined as extern, and are used on the
 	// video_sdl.cpp file
-	fight = pk_opponent;
-	def = pk_defence;
+	fight = &pk_opponent;
+	def = &pk_defence;
 
 	newSong("00.ogg");
 }
@@ -25,18 +25,16 @@ Battle::Battle(bool isWild, Poke defence, Poke opponent) : wild_battle(isWild),
 int Battle::remove_little_life_pk(int pk) {
 	// Always remove 1 hitpoint during each passage
 	if (pk == 0) {
-		if (life_to_remove > 0 && pk_opponent.health > 0) {
-			pk_opponent.health -= 1;
-			fight = pk_opponent;
+		if (life_to_remove > 0 && pk_opponent.getHealth() > 0) {
+			fight->causeDamage(1);
 			life_to_remove -= 1;
 		}
 		else
 			dont_do_anything = false;
 	}
 	else {
-		if (life_to_remove > 0 && pk_defence.health > 0) {
-			pk_defence.health -= 1;
-			def = pk_defence;
+		if (life_to_remove > 0 && pk_defence.isAlive()) {
+			def->causeDamage(1);
 			life_to_remove -= 1;
 		}
 		else
@@ -104,7 +102,7 @@ int Battle::battle_input() {
 						//opponent_attacks();
 						
 						// See if anyone has lost
-						if (pk_opponent.health <= 0 || pk_defence.health <= 0) {
+						if (pk_opponent.isDead() || !pk_defence.isDead()) {
 							battle_end();
 							return 1;
 						}
@@ -153,7 +151,7 @@ void Battle::process_attack() {
 
 	// There should be a way to get a move by simply
 	// searching for his name
-	Move attack_choosen = moves[pk_defence.moven[index]];
+	Move attack_choosen = moves[pk_defence.getMoven(index)];
 
 	// TODO: Check if we have enought PP
 	/* FIXME: Since PP is defined on the global moves
@@ -177,9 +175,9 @@ void Battle::process_attack() {
 			// TODO: Animate health bar.
 			dont_do_anything = true;
 
-			life_to_remove = (int)ceil(attack_choosen.getPower() / (fight.defense + fight.specd));
+			life_to_remove = (int)ceil(attack_choosen.getPower() / (fight->getDefense() + fight->getSpecd()));
 
-			menu_text = pk_defence.name + " used " + attack_choosen.getName() + "!";
+			menu_text = pk_defence.getName() + " used " + attack_choosen.getName() + "!";
 		}
 		else {
 			menu_text = "It missed.";
@@ -219,7 +217,7 @@ void Battle::opponent_attacks() {
 	int index = 0;
 	// There should be a way to get a move by simply
 	// searching for his name
-	Move attack_choosen = moves[pk_defence.moven[index]];
+	Move attack_choosen = moves[pk_defence.getMoven(index)];
 
 	// TODO: Check if we have enought PP
 	/* FIXME: Since PP is defined on the global moves
@@ -243,9 +241,9 @@ void Battle::opponent_attacks() {
 			// TODO: Animate health bar.
 			dont_do_anything = true;
 
-			life_to_remove = (int)ceil(attack_choosen.getPower() / (def.defense + def.specd));
+			life_to_remove = (int)ceil(attack_choosen.getPower() / (def->getDefense() + def->getSpecd()));
 
-			menu_text = pk_opponent.name + " used " + attack_choosen.getName() + "!";
+			menu_text = pk_opponent.getName() + " used " + attack_choosen.getName() + "!";
 		}
 		else {
 			menu_text = "It missed.";

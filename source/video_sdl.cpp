@@ -144,12 +144,12 @@ void sdlvideo_update() {
 		for(size_t y=0; y<Map.size(); ++y) {
 			int y_padding=0;
 			switch(Map[x][y]) {
-				case 0: break;
-				case 1070:
-				case 1390:
-				case 1400: y_padding=-8;
-				default:
-					imglist[Map[x][y]].draw(Sint16(y*16),Sint16(x*16+y_padding));
+			case 0: break;
+			case 1070:
+			case 1390:
+			case 1400: y_padding=-8;
+			default:
+				imglist[Map[x][y]].draw(Sint16(y*16),Sint16(x*16+y_padding));
 				break;
 			}
 		}
@@ -166,27 +166,27 @@ void sdlvideo_update() {
 		imglist[503].draw_static(76,0);
 		imglist[105].draw_static(90,63);
 	}
-        else if(r_pokemenu) { // Buntoid choice menu
-                imglist[505].draw_static(0,0);
-                if(poke_choice==0) {
-                        imglist[506].draw_static(4,17);
-                }
-                else {
-                        imglist[507].draw_static(74,Sint16(5+18.4*(poke_choice-1))); 
-                }
+	else if(r_pokemenu) { // Buntoid choice menu
+		imglist[505].draw_static(0,0);
+		if(poke_choice==0) {
+			imglist[506].draw_static(4,17);
+		}
+		else {
+			imglist[507].draw_static(74,Sint16(5+18.4*(poke_choice-1))); 
+		}
                 
-                imglist[508].draw_static(0,0);
-                iconimg[party[0].id].draw_static(6,19);
-                for (int i = 1; i < 6; i++) {
-                      iconimg[party[i].id].draw_static(76,Sint16(6+18.4*(i-1))); 
-                }
+		imglist[508].draw_static(0,0);
+		iconimg[party[0].getId()].draw_static(6,19);
+		for (int i = 1; i < 6; i++) {
+			iconimg[party[i].getId()].draw_static(76,Sint16(6+18.4*(i-1))); 
+		}
                 
-        }
-        else if(r_battle) { // draw things for battle
+	}
+	else if(r_battle) { // draw things for battle
 		
 		imglist[511].draw_static(0,0);
-		poseimg[fight.id].draw_static(104,0);
-		battleimg[def.id].draw_static(0,42);
+		poseimg[fight->getId()].draw_static(104,0);
+		battleimg[def->getId()].draw_static(0,42);
 		imglist[513].draw_static(84,74);
 		
 		
@@ -194,20 +194,20 @@ void sdlvideo_update() {
 		{
 			switch(battle_choice)
 			{
-				case 0:
-					imglist[510].draw_static(0,102);
+			case 0:
+				imglist[510].draw_static(0,102);
 				break;
-				case 1:
-					imglist[510].draw_static(0,123);				
+			case 1:
+				imglist[510].draw_static(0,123);				
 				break;
-				case 2:
-					imglist[510].draw_static(42,102);
+			case 2:
+				imglist[510].draw_static(42,102);
 				break;
-				case 3:
-					imglist[510].draw_static(42,123);
+			case 3:
+				imglist[510].draw_static(42,123);
 				break;
-				default:
-					error("Battle menu error.");
+			default:
+				error("Battle menu error.");
 				break;
 			}
 			imglist[509].draw_static(0,102);
@@ -223,74 +223,74 @@ void sdlvideo_update() {
 			
 			SDL_Surface* reblit;
 			
-			reblit=TTF_RenderUTF8_Blended(bfont,moves[def.moven[0]].getName().c_str(),battle_choice==4?green:white);
+			reblit=TTF_RenderUTF8_Blended(bfont,moves[def->getMoven()[0]].getName().c_str(),battle_choice==4?green:white);
 			SDL_BlitSurface(reblit,0,screen,&pos);
 			pos.x = 82;
 			
-			reblit=TTF_RenderUTF8_Blended(bfont,moves[def.moven[1]].getName().c_str(),battle_choice==6?green:white);
+			reblit=TTF_RenderUTF8_Blended(bfont,moves[def->getMoven()[1]].getName().c_str(),battle_choice==6?green:white);
 			SDL_BlitSurface(reblit,0,screen,&pos);
 			pos.y = 123;
 			
-			reblit=TTF_RenderUTF8_Blended(bfont,moves[def.moven[2]].getName().c_str(),battle_choice==7?green:white);
+			reblit=TTF_RenderUTF8_Blended(bfont,moves[def->getMoven()[2]].getName().c_str(),battle_choice==7?green:white);
 			SDL_BlitSurface(reblit,0,screen,&pos);
 			pos.x = 1;
 			
-			reblit=TTF_RenderUTF8_Blended(bfont,moves[def.moven[3]].getName().c_str(),battle_choice==5?green:white);
+			reblit=TTF_RenderUTF8_Blended(bfont,moves[def->getMoven()[3]].getName().c_str(),battle_choice==5?green:white);
 			SDL_BlitSurface(reblit,0,screen,&pos);
 
 		}
 		imglist[514].draw_static(0,4);
                 
-                //// draw health for enemy buntoid
-                float pcentoff = (((float)fight.health)/fight.maxhp) ;
-                int color = 0;
+		//// draw health for enemy buntoid
+		float pcentoff = (((float)fight->getHealth())/fight->getMaxHp()) ;
+		int color = 0;
 
-                if (pcentoff > 0.75)
-                {
-                  color = 0x00ff00ff;
-                }
-                else if (pcentoff > 0.5)
-                {
-                  color = 0xfde600ff;
-                }
-                else if (pcentoff > 0.25)
-                {
-                  color = 0xff8a00ff;
-                }
-                else
-                {
-                  color = 0xff0000ff;
-                }
+		if (pcentoff > 0.75)
+		{
+			color = 0x00ff00ff;
+		}
+		else if (pcentoff > 0.5)
+		{
+			color = 0xfde600ff;
+		}
+		else if (pcentoff > 0.25)
+		{
+			color = 0xff8a00ff;
+		}
+		else
+		{
+			color = 0xff0000ff;
+		}
                   
-                pcentoff *= 65;
-                pcentoff += 5;
-                hlineColor(screen,5, pcentoff,33, color);
-                hlineColor(screen,5, pcentoff,34, color);
+		pcentoff *= 65;
+		pcentoff += 5;
+		hlineColor(screen,5, pcentoff,33, color);
+		hlineColor(screen,5, pcentoff,34, color);
                 
-                //// draw health for player buntoid
-                pcentoff = (((float)def.health)/def.maxhp) ;
-                if (pcentoff > 0.75)
-                {
-                  color = 0x00ff00ff;
-                }
-                else if (pcentoff > 0.5)
-                {
-                  color = 0xfde600ff;
-                }
-                else if (pcentoff > 0.25)
-                {
-                  color = 0xff8a00ff;
-                }
-                else
-                {
-                  color = 0xff0000ff;
-                }
+		//// draw health for player buntoid
+		pcentoff = (((float)def->getHealth())/def->getMaxHp()) ;
+		if (pcentoff > 0.75)
+		{
+			color = 0x00ff00ff;
+		}
+		else if (pcentoff > 0.5)
+		{
+			color = 0xfde600ff;
+		}
+		else if (pcentoff > 0.25)
+		{
+			color = 0xff8a00ff;
+		}
+		else
+		{
+			color = 0xff0000ff;
+		}
                   
-                pcentoff *= 65;
-                pcentoff += 89;
-                hlineColor(screen,89, pcentoff,103, color);
-                hlineColor(screen,89, pcentoff,104, color);
-        }
+		pcentoff *= 65;
+		pcentoff += 89;
+		hlineColor(screen,89, pcentoff,103, color);
+		hlineColor(screen,89, pcentoff,104, color);
+	}
         
 
 	//Text box
