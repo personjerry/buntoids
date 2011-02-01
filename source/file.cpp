@@ -10,25 +10,17 @@
 void savegame() {
 	std::ofstream f("data/save.txt");
 	f<<Game::map<<'\n'<<player.x()<<' '<<player.y()<<' '<<player.direction()<<'\n';
+
+	// Save the bots' information
 	f << bots.size() << '\n';
 	for(size_t i=0; i<bots.size(); ++i) {
 		f<<bots[i].x()<<' '<<bots[i].y()<<' '<<bots[i].get_direction()<<'\n';
 	}
-	for(size_t i=0; i<6; ++i) {
-		if (party[i].getName() != "EMPTY") {
-			f<<party[i].getId()<<' '<<party[i].getName()<<' '<<party[i].getPoseSpriteFilename()<<' '<<party[i].getBattleSpriteFilename()<<' '<<party[i].getLevel()<<' '<<party[i].getMaxHp()<<' '<<party[i].getHpPerLvl()<<' '<<party[i].getAttack()<<' '<<party[i].getAttPerLvl()<<' '<<party[i].getDefense()<<' '<<party[i].getDefPerLvl()<<' '<<party[i].getSpeca()<<' '<<party[i].getSpecaPerLvl()<<' '<<party[i].getSpecd()<<' '<<party[i].getSpecdPerLvl()<<' '<<party[i].getHealth()<<' '<<party[i].getExp()<<' ';
 
-			std::vector<int> pokeCurpp = party[i].getCurpp();
-			for (std::vector<int>::iterator k = pokeCurpp.begin(); k != pokeCurpp.end(); k++) {
-			    f << *k << ' ';
-			}
-			
-			std::vector<int> pokeMoven = party[i].getMoven();
-			for (std::vector<int>::iterator k = pokeMoven.begin(); k != pokeMoven.end(); k++) {
-			    f << *k << ' ';
-			}
-			f << '\n';
-		}
+	// Save the party information
+	for(size_t i=0; i<6; ++i) {
+		if (party[i].getName() != "EMPTY")
+			f << party[i].toString();
 		else
 			f<<"N/A\n";
 	}

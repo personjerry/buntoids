@@ -50,6 +50,7 @@ public:
 	int getCurpp(int move);
 	int getMoven(int move);
 
+	std::string toString();
 private:
 	int _id;
 	std::string _name;

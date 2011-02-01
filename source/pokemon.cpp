@@ -121,6 +121,25 @@ int Poke::getMoven(int move) {
 	return _moven[move];
 }
 
+std::string Poke::toString() {
+	std::ostringstream output;
+	
+	output<<getId()<<' '<<getName()<<' '<<getPoseSpriteFilename()<<' '<<getBattleSpriteFilename()<<' '<<getLevel()<<' '<<getMaxHp()<<' '<<getHpPerLvl()<<' '<<getAttack()<<' '<<getAttPerLvl()<<' '<<getDefense()<<' '<<getDefPerLvl()<<' '<<getSpeca()<<' '<<getSpecaPerLvl()<<' '<<getSpecd()<<' '<<getSpecdPerLvl()<<' '<<getHealth()<<' '<<getExp()<<' ';
+
+	std::vector<int> pokeCurpp = getCurpp();
+	for (std::vector<int>::iterator k = pokeCurpp.begin(); k != pokeCurpp.end(); k++) {
+		output << *k << ' ';
+	}
+			
+	std::vector<int> pokeMoven = getMoven();
+	for (std::vector<int>::iterator k = pokeMoven.begin(); k != pokeMoven.end(); k++) {
+		output << *k << ' ';
+	}
+	output << '\n';
+
+	return output.str();
+}
+
 std::vector<Poke> monsters;
 std::vector<Poke> party;
 
