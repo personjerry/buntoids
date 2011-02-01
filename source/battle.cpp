@@ -102,7 +102,7 @@ int Battle::battle_input() {
 						//opponent_attacks();
 						
 						// See if anyone has lost
-						if (pk_opponent.isDead() || !pk_defence.isDead()) {
+						if (pk_opponent.isDead() || pk_defence.isDead()) {
 							battle_end();
 							return 1;
 						}
