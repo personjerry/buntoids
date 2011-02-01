@@ -10,16 +10,13 @@
 void savegame() {
 	std::ofstream f("data/save.txt");
 	f<<Game::map<<'\n'<<player.x()<<' '<<player.y()<<' '<<player.direction()<<'\n';
+	f << bots.size() << '\n';
 	for(size_t i=0; i<bots.size(); ++i) {
 		f<<bots[i].x()<<' '<<bots[i].y()<<' '<<bots[i].get_direction()<<'\n';
 	}
 	for(size_t i=0; i<6; ++i) {
 		if (party[i].getName() != "EMPTY") {
-
-			// FIXME: party[i].getCurpp() and party[i].getMoven() is
-			// storing an int* so things will probably break when
-			// loading
-			f<<party[i].getId()<<party[i].getName()<<' '<<party[i].getPoseSpriteFilename()<<' '<<party[i].getBattleSpriteFilename()<<' '<<party[i].getLevel()<<' '<<party[i].getMaxHp()<<' '<<party[i].getHpPerLvl()<<' '<<party[i].getAttack()<<' '<<party[i].getAttPerLvl()<<' '<<party[i].getDefense()<<' '<<party[i].getDefPerLvl()<<' '<<party[i].getSpeca()<<' '<<party[i].getSpecaPerLvl()<<' '<<party[i].getSpecd()<<' '<<party[i].getSpecdPerLvl()<<' '<<party[i].getHealth()<<' '<<party[i].getExp()<<' ';
+			f<<party[i].getId()<<' '<<party[i].getName()<<' '<<party[i].getPoseSpriteFilename()<<' '<<party[i].getBattleSpriteFilename()<<' '<<party[i].getLevel()<<' '<<party[i].getMaxHp()<<' '<<party[i].getHpPerLvl()<<' '<<party[i].getAttack()<<' '<<party[i].getAttPerLvl()<<' '<<party[i].getDefense()<<' '<<party[i].getDefPerLvl()<<' '<<party[i].getSpeca()<<' '<<party[i].getSpecaPerLvl()<<' '<<party[i].getSpecd()<<' '<<party[i].getSpecdPerLvl()<<' '<<party[i].getHealth()<<' '<<party[i].getExp()<<' ';
 
 			std::vector<int> pokeCurpp = party[i].getCurpp();
 			for (std::vector<int>::iterator k = pokeCurpp.begin(); k != pokeCurpp.end(); k++) {
@@ -58,7 +55,12 @@ void loadgame() {
 		player.set_y(y);
 		player.turn(direction);
 
-		for(int i=0; f>>x>>y>>direction; ++i) {
+		int n_bots = -1;
+		f >> n_bots;
+		bots.reserve(n_bots);
+
+		for(int i=0; i != n_bots; ++i) {
+			f >> x >> y >> direction;
 			bots.at(i).set_x(x);
 			bots.at(i).set_y(y);
 			bots.at(i).turn(direction);
@@ -106,9 +108,25 @@ void loadgame() {
 				f >> specd_per_lvl;
 				f >> health;
 				f >> exp;
-				// FIXME: curpp and moven don't work yet
-				// f >> curpp;
-				// f >> moven;
+
+				int temp = -1;
+				f >> temp;
+				curpp.push_back(temp);
+				f >> temp;
+				curpp.push_back(temp);
+				f >> temp;
+				curpp.push_back(temp);
+				f >> temp;
+				curpp.push_back(temp);
+
+				f >> temp;
+				moven.push_back(temp);
+				f >> temp;
+				moven.push_back(temp);
+				f >> temp;
+				moven.push_back(temp);
+				f >> temp;
+				moven.push_back(temp);
 
 				party[i] = Poke(id, name, pose, battle, level,
 								maxhp, hp_per_lvl,

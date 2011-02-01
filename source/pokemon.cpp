@@ -121,11 +121,8 @@ int Poke::getMoven(int move) {
 	return _moven[move];
 }
 
-
-
 std::vector<Poke> monsters;
 std::vector<Poke> party;
-//party.reserve(6);
 
 // Create empty Pokemon
 std::vector<int> emptymove;
@@ -134,24 +131,6 @@ Poke EMPTY(-1,"EMPTY","","",0,0,0,0,0,0,0,0,0,0,0,0,0,emptymove,emptymove);
 Poke *fight;
 Poke *def;
 int pokecount;
-
-// void setpokemon(Poke* target,int id, int level, double maxhp, double hp_per_lvl, double attack, double att_per_lvl, double defense, double def_per_lvl, double spa,double spalvl, double spd, double spdlvl, double health, int exp)
-// {
-// 	target->level = level;
-// 	target->id = id;
-// 	target->maxhp = maxhp;
-// 	target->hp_per_lvl = hp_per_lvl;
-// 	target->attack = attack;
-// 	target->att_per_lvl = att_per_lvl;
-// 	target->defense = defense;
-// 	target->def_per_lvl = def_per_lvl;
-// 	target->speca = spa;
-// 	target->speca_per_lvl = spalvl;
-// 	target->specd = spd;
-// 	target->specd_per_lvl = spdlvl;
-// 	target->health = health;
-// 	target->exp = exp;
-// }
 
 void pokemon_init() {
 	//do we want to make our own pokemon?
@@ -254,14 +233,13 @@ void pokemon_init() {
 		exit(1);
 	}
 
-
 	// fill party slots with empty at first.
-	party[0] = EMPTY;
-	party[1] = EMPTY;
-	party[2] = EMPTY;
-	party[3] = EMPTY;
-	party[4] = EMPTY;
-	party[5] = EMPTY;
+	party.push_back(EMPTY);
+	party.push_back(EMPTY);
+	party.push_back(EMPTY);
+	party.push_back(EMPTY);
+	party.push_back(EMPTY);
+	party.push_back(EMPTY);
 
 	// testing with all bulbasaurs.
 	party[0] = monsters[0];

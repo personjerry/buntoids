@@ -7,7 +7,7 @@ PROG=buntoids
 DEST=../$(PROG)_$(ARCH)
 
 LFLAGS=	`sdl-config --libs` -lSDL_image -lSDL_ttf -lSDL_gfx -lopenal -lvorbisfile
-CFLAGS=	-c -g -O3 -pedantic -std=c++98 -Weffc++ -Wall -Wextra -Wshadow \
+CFLAGS=	-c -ggdb3 -O0 -pedantic -std=c++98 -Weffc++ -Wall -Wextra -Wshadow \
 		-Wunknown-pragmas -Wwrite-strings -Wdisabled-optimization \
 		-Wconversion
 
