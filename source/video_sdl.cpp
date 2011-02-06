@@ -242,7 +242,7 @@ void sdlvideo_update() {
 		imglist[514].draw_static(0,4);
                 
 		//// draw health for enemy buntoid
-		float pcentoff = (((float)fight->getHealth())/fight->getMaxHp()) ;
+		double pcentoff = (fight->getHealth()/fight->getMaxHp()) ;
 		int color = 0;
 
 		if (pcentoff > 0.75)
@@ -264,11 +264,11 @@ void sdlvideo_update() {
                   
 		pcentoff *= 65;
 		pcentoff += 5;
-		hlineColor(screen,5, pcentoff,33, color);
-		hlineColor(screen,5, pcentoff,34, color);
+		hlineColor(screen,5, (Sint16)pcentoff,33, color);
+		hlineColor(screen,5, (Sint16)pcentoff,34, color);
                 
 		//// draw health for player buntoid
-		pcentoff = (((float)def->getHealth())/def->getMaxHp()) ;
+		pcentoff = (def->getHealth()/def->getMaxHp()) ;
 		if (pcentoff > 0.75)
 		{
 			color = 0x00ff00ff;
@@ -288,8 +288,8 @@ void sdlvideo_update() {
                   
 		pcentoff *= 65;
 		pcentoff += 89;
-		hlineColor(screen,89, pcentoff,103, color);
-		hlineColor(screen,89, pcentoff,104, color);
+		hlineColor(screen,89, (Sint16)pcentoff,103, color);
+		hlineColor(screen,89, (Sint16)pcentoff,104, color);
 	}
         
 
